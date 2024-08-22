@@ -73,7 +73,9 @@ async function saveSession() {
   for (let window of allWindows) {
     if(window.tabs) {
       let groupId = Math.floor(Math.random() * 100000);
-      const tabArray = window.tabs.map((tab) => ({
+      const tabArray = window.tabs
+      .filter(tab => !tab.url?.startsWith("chrome-extension"))
+      .map((tab) => ({
         url: tab.url!,
         client_id: tab.id!,
         groupId,
@@ -86,7 +88,7 @@ async function saveSession() {
       allGroups.push(grp);
       
       for (let tab of window.tabs) {
-        if(tab.id && !tab.url?.startsWith("chrome://")) await chrome.tabs.remove(tab.id);
+        if(tab.id && !tab.url?.startsWith("chrome-extension")) await chrome.tabs.remove(tab.id);
       }
     }
   }
