@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Hello World Extension",
+  "name": "Save Tabs",
   "version": "1.0",
 
   "background": {
