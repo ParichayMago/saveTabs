@@ -80,10 +80,10 @@ function App() {
         <div className="absolute top-1 right-2 flex cursor-pointer text-[#0e7490] ">
           <div className="self-center hover:text-[#06b6d4] hover:scale-110 ease-in-out transition  duration-100 mx-3" onClick={() => window.open("https://github.com/ParichayMago/saveTabs")}>Source Code</div>
           <div
-            className="Donate Div flex m-2 hover:text-[#06b6d4] hover:scale-110 ease-in-out transition duration-100"
+            className="Donate Div self-center flex m-2 hover:text-[#06b6d4] hover:scale-110 ease-in-out transition duration-100"
             onClick={() => window.open("https://razorpay.me/@parichaymago")}
           >
-            <div>donatate to devs</div>
+            <div >donatate to dev</div>
             <img height="24px" width="24px" className="" src={img} />
           </div>
         </div>
