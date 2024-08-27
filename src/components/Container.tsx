@@ -31,11 +31,12 @@ const ContainerOfTabs: React.FC<ContainerOfTabsProps> = ({
 
       if (group) {
         const urls = [...new Set(group.tabData.map((tab: any) => tab.url))];
-        // await chrome.windows.create({focused: true})
+        const newWindow = await chrome.windows.create({ focused: true });
+        const windowId = newWindow.id;
         for (const url of urls) {
-          if (typeof url === "string"){
-            await chrome.tabs.create({ url });
-          } 
+          if (typeof url === "string") {
+            await chrome.tabs.create({ windowId, url });
+          }
         }
       }
     }

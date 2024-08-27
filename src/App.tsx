@@ -3,6 +3,7 @@ import DndList from "./components/DragAndDrop";
 import { MantineProvider } from "@mantine/core";
 import Container from "./components/Container";
 import "@mantine/core/styles.css";
+import img from "../public/icon.png";
 
 export interface Itabs {
   _id?: string;
@@ -75,8 +76,20 @@ function App() {
 
   return (
     <>
+      <div className="static">
+        <div className="absolute top-1 right-2 flex cursor-pointer text-[#0e7490] ">
+          <div className="self-center hover:text-[#06b6d4] hover:scale-110 ease-in-out transition  duration-100 mx-3" onClick={() => window.open("https://github.com/ParichayMago/saveTabs")}>Source Code</div>
+          <div
+            className="Donate Div flex m-2 hover:text-[#06b6d4] hover:scale-110 ease-in-out transition duration-100"
+            onClick={() => window.open("https://razorpay.me/@parichaymago")}
+          >
+            <div>donatate to devs</div>
+            <img height="24px" width="24px" className="" src={img} />
+          </div>
+        </div>
+      </div>
       {containerData ? (
-        <div className="static">
+        <div>
           <MantineProvider>
             <div className="bg-black border-0 p-0 overflow-hidden text-sm">
               <ListData
