@@ -63,7 +63,7 @@ function closeTabs(tabs: Itabs[]) {
 }
 
 function openExtension(): void {
-  chrome.tabs.create({ url: chrome.runtime.getURL("index.html"), active: true, pinned: true });
+  chrome.tabs.create({ url: chrome.runtime.getURL("index.html"), active: true, pinned: true, index: 0 });
 }
 
 async function saveSession() {
