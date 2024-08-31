@@ -35,6 +35,48 @@ export function DndList({ initialData }: { initialData: Itabs[] }) {
     });
     await chrome.storage.local.set({ grpArr: updatedGrpArr });
   };
+
+  const updateAtDragEnd = async (updatedContainerTabData: Itabs[]) => {
+    const { grpArr } = (await chrome.storage.local.get("grpArr")) as {
+      grpArr: Icontainer[];
+    };
+    const newUpdatedData = grpArr.map((container) => {
+      if (container.groupId === updatedContainerTabData[0].groupId) {
+        return {
+          ...container,
+          tabData: updatedContainerTabData,
+        };
+      }
+      return container;
+    });
+
+    await chrome.storage.local.set({ grpArr: newUpdatedData });
+  };
+
+  const handleDragEnd = ({ destination, source }: any) => {
+    if (!destination) return;
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    handlers.reorder({ from: source.index, to: destination.index });
+
+    const reorderedState = [...state];
+    const [movedItem] = reorderedState.splice(source.index, 1);
+    reorderedState.splice(destination.index, 0, movedItem);
+
+    const updatedTabData = reorderedState.map((item, index) => ({
+      ...item,
+      index,
+    }));
+
+    updateAtDragEnd(updatedTabData);
+  };
+
   const items = state.map((data, index) => (
     <Draggable
       key={data.client_id}
@@ -78,26 +120,7 @@ export function DndList({ initialData }: { initialData: Itabs[] }) {
   ));
 
   return (
-    <DragDropContext
-      onDragEnd={({ destination, source }) => {
-        if (!destination) return;
-
-        handlers.reorder({ from: source.index, to: destination.index });
-
-        const newState = [...state];
-        const [removed] = newState.splice(source.index, 1);
-        newState.splice(destination.index, 0, removed);
-
-        const updatedData = newState.map((item, index) => ({
-          ...item,
-          index,
-        }));
-
-        console.log("the indices are to be updated => ", updatedData);
-        // Uncomment if you want to perform API call for updating indices
-        // updateAllIndices(updatedData);
-      }}
-    >
+    <DragDropContext onDragEnd={handleDragEnd}>
       <Droppable droppableId="dnd-list" direction="vertical">
         {(provided) => (
           <div
@@ -115,4 +138,3 @@ export function DndList({ initialData }: { initialData: Itabs[] }) {
 }
 
 export default DndList;
-
