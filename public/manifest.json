@@ -17,12 +17,7 @@
   },
    "permissions": [
       "storage",
-      "downloads",
       "tabs",
-      "storage",
-      "activeTab",
-      "scripting",
-      "identity",
-      "identity.email"  
+      "storage"
    ]
 }

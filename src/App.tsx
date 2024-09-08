@@ -54,6 +54,7 @@ const ListData = ({
     <div className="bg-red p-2 m-2 text-red-600">Save tabs to continue</div>
   );
 };
+
 function App() {
   const [containerData, setContainerData] = useState<Icontainer[] | null>(null);
 
@@ -61,7 +62,8 @@ function App() {
     const newContainerData = containerData!.filter(
       (data) => data.groupId !== groupId
     );
-    await chrome.storage.local.remove("grpArr");
+
+    // Update storage and state
     await chrome.storage.local.set({ grpArr: newContainerData });
     setContainerData(newContainerData);
   };
@@ -82,7 +84,7 @@ function App() {
             className="Donate Div self-center flex m-2 hover:text-[#06b6d4] hover:scale-110 ease-in-out transition duration-100"
             onClick={() => window.open("https://razorpay.me/@parichaymago")}
           >
-            <div>donatate</div>
+            <div>Donate</div>
             <img height="24px" width="24px" className="" src={img} />
           </div>
           <div
@@ -112,3 +114,4 @@ function App() {
 }
 
 export default App;
+  

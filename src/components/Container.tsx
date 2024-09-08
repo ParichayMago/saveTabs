@@ -22,6 +22,13 @@ const ContainerOfTabs: React.FC<ContainerOfTabsProps> = ({
     setCurrentTabData(tabData);
   }, [tabData]);
 
+  useEffect(() => {
+    console.log("use Effect has been called")
+    if (currentTabData.length == 0) {
+      deleteContainer(groupId);
+    }
+  }, [currentTabData, deleteContainer, groupId]);
+
   async function retrieveAllTabs(groupId: number) {
     const result = await chrome.storage.local.get("grpArr");
     const grpArr = result.grpArr;
