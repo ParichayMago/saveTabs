@@ -11,7 +11,7 @@ function runXtention(action: string) {
 const Popup = () => {
   return (
     <>
-      <div className="p-2 space-y-2">
+      <div className="p-2 space-y-2 bg-[#1e1b4b]">
         <Button
           className="bg-blue-500 text-white font-bold py-1 px-1 my-1 rounded-lg hover:bg-blue-600 shadow-md transition duration-300 ease-in-out"
           onClick={() => runXtention("saveTabs")}
